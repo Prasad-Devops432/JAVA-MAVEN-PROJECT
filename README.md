@@ -1,148 +1,37 @@
-# 🚀 Java Maven Project – CI/CD Ready Application
+# Java Maven Project
 
-This repository contains a simple **Java application built using Maven**, designed for learning, practicing, and demonstrating **DevOps CI/CD pipelines** using tools like Jenkins, Docker, SonarQube, Kubernetes, and ArgoCD.
+A small Java web project built with Maven and packaged as a WAR. It contains a
+`Calculator` class with `add`, `sub` and `multiply` methods, JUnit tests for them,
+and a JSP front page (`index.jsp`) with CSS. I use it to practise Maven builds and CI/CD pipelines.
 
-It is structured to help you showcase real‑world build automation and deployment workflows.
+> **Source note:** The code comes from a tutorial project (package `in.javahome`).
+> I use it as a practice project, not as original work.
 
----
+## Project layout
 
-## 📌 Project Overview
-
-This Java Maven project includes:
-
-- Standard Maven project structure  
-- `pom.xml` for dependency management  
-- Source code under `src/main/java`  
-- Unit tests under `src/test/java`  
-- Ready for CI/CD integration with Jenkins  
-- Can be containerized using Docker  
-- Suitable for deployment on Kubernetes or cloud platforms  
-
----
-
-## 🧱 Project Structure
+The Maven project is in the nested folder:
 
 ```
 JAVA-MAVEN-PROJECT/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── <your-app-code>
-│   └── test/
-│       └── java/
-│           └── <your-test-code>
-│
-├── pom.xml
-└── README.md
+└── java-maven-project-new-master/java-maven-project-new-master/
+    ├── pom.xml                                  # Maven build (artifactId: myapp)
+    └── src/
+        ├── main/java/in/javahome/myweb/controller/Calculator.java
+        ├── main/webapp/                         # Web pages, CSS and images
+        └── test/java/in/javahome/myweb/controller/CalculatorTest.java
 ```
 
----
+## Build and test
 
-## ⚙️ Build & Run the Application
+Requirements: JDK 8 (the POM compiles to Java 1.8), Maven 3.
 
-### **1. Build using Maven**
 ```bash
-mvn clean install
+cd java-maven-project-new-master/java-maven-project-new-master
+mvn clean test       # run the unit tests
+mvn package          # builds a .war file in target/ (packaging is war)
 ```
 
-### **2. Run the application**
-```bash
-mvn spring-boot:run
-```
-*(If it’s a Spring Boot app — otherwise run your compiled `.jar`)*
+## Notes
 
-### **3. Run tests**
-```bash
-mvn test
-```
-
----
-
-## 🐳 Docker Support (Optional)
-
-If you add a Dockerfile, you can containerize the app:
-
-### **Build Docker image**
-```bash
-docker build -t java-maven-app .
-```
-
-### **Run container**
-```bash
-docker run -p 8080:8080 java-maven-app
-```
-
----
-
-## 🔧 CI/CD Integration (Jenkins Ready)
-
-This project is ideal for Jenkins pipelines:
-
-### Example CI/CD stages:
-- Checkout code  
-- Maven build  
-- Unit testing  
-- SonarQube scan  
-- Docker build & push  
-- Deploy to Kubernetes (Helm / ArgoCD)  
-
-You can plug this repo directly into a Jenkinsfile like:
-
-```groovy
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                echo "Running SonarQube scan..."
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                echo "Building Docker image..."
-            }
-        }
-    }
-}
-```
-
----
-
-## 🧰 Technologies Used
-
-| Category | Tools |
-|---------|-------|
-| **Language** | Java |
-| **Build Tool** | Maven |
-| **Testing** | JUnit |
-| **CI/CD** | Jenkins |
-| **Quality** | SonarQube |
-| **Containers** | Docker |
-| **Deployment** | Kubernetes, ArgoCD |
-
----
-
-## 🎯 Purpose of This Project
-
-This project is designed to help you:
-
-- Practice Java + Maven development  
-- Build CI/CD pipelines in Jenkins  
-- Learn Docker containerization  
-- Deploy applications to Kubernetes  
-- Strengthen your DevOps portfolio  
+- The nested folder name is a leftover from the download. Renaming it to a single level would make the repository easier to browse.
+- The `Calculator` tests show the basic pattern: a plain Java class, tested with JUnit in `src/test`.
